@@ -21,24 +21,26 @@ self.addEventListener('fetch', (ev) => {
     //Se verifica si existe un archivo con ese nombre
     if (ev.request.url.includes('imagen2.jpg')) {
         //Cambias el recurso enviado en la ruta por uno nuevo, en esta caso imagen
-        let response = fetch('images/imagen.jpg');
+        let response = fetch('./images/imagen.jpg');
 
         //Envia a la pagina la ruta con el recurso modificado
         ev.respondWith(response)
     }
 
+    /*
     //forma de verificar el fetch antes de hacer una accion
     fetch(event.request.url).then((resp)=>{
         console.log(resp);
         if(resp.ok){
             event.respondWith(resp);
         }else{
-            const generic = fetch('images/images2.jpg');
+            const generic = fetch('./images/images2.jpg');
             event.respondWith(generic);
         }
     }).catch((err)=>{
         console.log("SW: err"+err);
     })
+*/
 
     if (ev.request.url.includes('style.css')) {
         const respuesta = new Response(
