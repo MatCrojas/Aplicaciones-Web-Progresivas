@@ -3,5 +3,3 @@ if (navigator.serviceWorker) {
 } else {
     console.log('No se permite SW :(');
 }
-
-// https://matcrojas.github.io/Aplicaciones-Web-Progresivas/10b/practica3/sw.js
