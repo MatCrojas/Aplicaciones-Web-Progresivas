@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>List Personas</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+</head>
+
+<body>
+
+    <h1>Persona Form</h1>
+    <div class="row g-3">
+        <div class="col-auto">
+            <label for="name" class="visually-hidden">Name</label>
+            <input type="text" class="form-control" id="name" placeholder="Juan Pedro Lopez...">
+        </div>
+
+        <div class="col-auto">
+            <label for="job" class="visually-hidden">Job</label>
+            <input type="text" class="form-control" id="job" placeholder="Obrero...">
+        </div>
+
+        <div class="col-auto">
+            <button onclick="register()" class="btn btn-primary mb-3">Send</button>
+        </div>
+    </div>
+
+    <h1>List Personas</h1>
+    <table class="table table-dark table-striped">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Email</th>
+                <th scope="col">Name</th>
+                <th scope="col">Last Name</th>
+                <th scope="col">Avatar</th>
+            </tr>
+        </thead>
+        <tbody id="tableBody">
+
+        </tbody>
+    </table>
+
+    <img src="https://laverdadnoticias.com/__export/1572128049924/sites/laverdad/img/2019/10/26/malvados_hombres_donan_alimento_para_perros_con_veneno_y_vidrios1.jpeg_1902800913.jpeg" alt=""/>
+    <img src="https://es.bcdn.biz/Images/2015/2/24/6f90608f-52a8-4a4e-a155-e2afa4e14144.jpg" alt=""/>
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTTMUMbaRHWPbzV1yIfp_vt16zoiMflG4xuw&usqp=CAU" alt=""/>
+    <img src="https://www.elsoldepuebla.com.mx/doble-via/virales/nuiae8-tiktoker-se-hace-viral-al-entrevistar-perritos-en-la-calle/ALTERNATES/LANDSCAPE_768/TikToker%20se%20hace%20viral%20al%20entrevistar%20perritos%20en%20la%20calle" alt=""/>
+    <img src="https://www.elsoldetampico.com.mx/incoming/yqt5zm-pixar-trae-de-vuelta-a-up-con-serie-de-dug/ALTERNATES/LANDSCAPE_768/Pixar%20trae%20de%20vuelta%20a%20UP%20con%20serie%20de%20Dug" alt=""/>
+    <img src="https://s8c8k9q7.hostrycdn.com/wp-content/uploads/2022/08/Captura-50.jpg" alt=""/>
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYat4rT7MZk50cB5Tj8hc22P8ZWEyI9eeLKQ&usqp=CAU" alt=""/>
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBPVO029RV4-BjxshKMYEZgGctQ412bUMftQ&usqp=CAU" alt=""/>
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcurOOhIeAuvvOHuJ97brbfAmVMzbQuFOceg&usqp=CAU" alt=""/>
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWoqwt6N5Yon_PS9K9yPU1cDIjfTu7wC0y-4nk_dXLh75JnsHUMLi5Wh4pd7JMKsqLiz4&usqp=CAU" alt=""/>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+        crossorigin="anonymous"></script>
+        <script src="js/app.js"></script>
+    <script>
+
+        fetch('https://reqres.in/api/users?page=2')
+            .then(res => res.json())
+            .then(res => res.data)
+            .then(res => {
+                let tableBody = document.getElementById('tableBody');
+                for (let i = 0; i < res.length; i++) {
+                    let row = document.createElement('tr');
+                    let id = document.createElement('th');
+                    let email = document.createElement('th');
+                    let name = document.createElement('th');
+                    let lastName = document.createElement('th');
+                    let avatar = document.createElement('th');
+
+                    id.innerHTML = res[i].id;
+                    email.innerHTML = res[i].email;
+                    name.innerHTML = res[i].first_name;
+                    lastName.innerHTML = res[i].last_name;
+                    avatar.innerHTML = res[i].avatar;
+
+                    row.appendChild(id);
+                    row.appendChild(email);
+                    row.appendChild(name);
+                    row.appendChild(lastName);
+                    row.appendChild(avatar);
+                    tableBody.appendChild(row);
+                }
+            });
+
+        function register() {
+            let nameForm = document.getElementById('name').value;
+            let jobForm = document.getElementById('job').value;
+            var responseFetch = fetch('https://reqres.in/api/users', {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    name: `${nameForm}`,
+                    job: `${jobForm}`
+                })
+            })
+                .then(res => res.json())
+                .then(res => console.log(res))
+        }
+    </script>
+</body>
+
+</html>
