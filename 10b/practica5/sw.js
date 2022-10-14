@@ -67,6 +67,7 @@ self.addEventListener('fetch', (event) => {
             return fetch(event.request).then((respWeb)=>{
                 caches.open(DINAMIC_CACHE_NAME).then((cacheDynamic)=>{
                     cacheDynamic.put(event.request, respWeb)
+                    cleanCache(DINAMIC_CACHE_NAME,4)
                 })
                 return respWeb.clone();
             })
