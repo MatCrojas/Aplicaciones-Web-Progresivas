@@ -58,7 +58,7 @@ self.addEventListener('fetch', (event) => {
 self.addEventListener('fetch', (event) => {
 
     resp = null;
-    if(event.request.url.include('reqres.in')){
+    if(event.request.url.includes('reqres.in')){
         //Aplico el cache with network
         resp = caches.match(event.request).then((respCache)=>{
             if(respCache){
