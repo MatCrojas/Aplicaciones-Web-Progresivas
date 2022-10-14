@@ -5,9 +5,9 @@ const DINAMIC_CACHE_NAME = 'dinamiccache-v1';
 self.addEventListener('install', (event) => {
     const promCache = caches.open(STATIC_CACHE_NAME).then((cache) => {
         cache.addAll([
-            '/',
-            '/index.html',
-            '/js/app.js'
+            'https://matcrojas.github.io/Aplicaciones-Web-Progresivas/10b/practica6/',
+            'https://matcrojas.github.io/Aplicaciones-Web-Progresivas/10b/practica6/index.html',
+            'https://matcrojas.github.io/Aplicaciones-Web-Progresivas/10b/practica6/js/app.js'
         ])
     })
 
