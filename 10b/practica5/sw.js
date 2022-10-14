@@ -23,10 +23,10 @@ self.addEventListener('install', (event) => {
 
     const respCache = caches.open(STATIC_CACHE_NAME).then((cache) => {
         return cache.addAll([
-            '/',
-            '/index.html',
-            '/css/style.css',
-            '/js/app.js',
+            'https://matcrojas.github.io/Aplicaciones-Web-Progresivas/10b/practica5/',
+            'https://matcrojas.github.io/Aplicaciones-Web-Progresivas/10b/practica5/index.html',
+            'https://matcrojas.github.io/Aplicaciones-Web-Progresivas/10b/practica5/css/style.css',
+            'https://matcrojas.github.io/Aplicaciones-Web-Progresivas/10b/practica5/js/app.js',
         ]);
 
     });
