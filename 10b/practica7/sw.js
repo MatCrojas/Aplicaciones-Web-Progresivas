@@ -7,10 +7,10 @@ self.addEventListener('install', (event) => {
 
     const respCache = caches.open(STATIC_CACHE_NAME).then((cache) => {
         return cache.addAll([
-            '/',
-            '/index.html',
-            '/manifest.json',
-            '/images/icons/android-launchericon-144-144.png'
+            'https://matcrojas.github.io/Aplicaciones-Web-Progresivas/10b/practica7/',
+            'https://matcrojas.github.io/Aplicaciones-Web-Progresivas/10b/practica7/index.html',
+            'https://matcrojas.github.io/Aplicaciones-Web-Progresivas/10b/practica7/manifest.json',
+            'https://matcrojas.github.io/Aplicaciones-Web-Progresivas/10b/practica7/images/icons/android-launchericon-144-144.png'
         ]);
     });
 
