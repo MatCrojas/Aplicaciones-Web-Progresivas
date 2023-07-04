@@ -5,16 +5,16 @@ var maxNotes = 1;
 //Contiene el maximo de notas en pantalla
 var onPage = 0;
 //Contiene el limite de notas que traera cada que hace una consulta
-var limit = 5;
+var limit = 8;
 
 //La n representa desde que numero del arreglo comienza a pintar las notas
 const getAllNotes = async (n) => {
     const doc = await getNotesFireStore();
     let card = document.getElementById('cards')
     let newCard = document.createElement('div');
-
+    //let actualList = onPage;
     maxNotes = doc.size;
-
+    console.log(doc);
     newCard.innerHTML = '';
 
     doc.forEach((doc) => {
@@ -39,7 +39,8 @@ const getAllNotes = async (n) => {
         </div>`
             card.appendChild(newCard);
             document.getElementById("note" + onPage).addEventListener("click", function () {
-                $('#exampleModal').modal({ show:true });
+                $('#exampleModal').modal({ show: true });
+                document.getElementById("nota-id").value = doc.id;
                 document.getElementById("nota-text").innerHTML = doc.data().text;
             }, false);
             limit--;
@@ -48,7 +49,7 @@ const getAllNotes = async (n) => {
 
         n--;
     });
-    limit = 5;
+    limit = 8;
 }
 
 const saveNote = async (note) => {
@@ -88,8 +89,10 @@ const updateNote = async (note) => {
 
 const btnUpdateNote = document.getElementById('btnUpdateNote');
 btnUpdateNote.addEventListener('click', async () => {
-    const textNote = document.getElementById('textNote');
+    const textNote = document.getElementById('nota-text');
+    const idNote = document.getElementById('nota-id')
     const note = {
+        id: idNote.value,
         text: textNote.value
     }
 
@@ -97,15 +100,21 @@ btnUpdateNote.addEventListener('click', async () => {
 
     textNote.value = '';
 
-    await getAllNotes(maxNotes + 1);
+    window.location.reload();
 
 });
 
 //Para funcionar con el scroll
 const onScroll = () => {
-    if (document.body.scrollHeight - window.innerHeight === window.scrollY) {
-        // hacer fetch
-        getAllNotes(5)
+    const scrollHeight = Math.max(
+        document.body.scrollHeight, document.documentElement.scrollHeight,
+        document.body.offsetHeight, document.documentElement.offsetHeight,
+        document.body.clientHeight, document.documentElement.clientHeight
+    );
+
+
+    if (window.pageYOffset + window.innerHeight >= scrollHeight - 1) {
+        getAllNotes(8)
     }
 }
 
@@ -113,3 +122,23 @@ window.addEventListener('scroll', onScroll)
 
 getAllNotes(0);
 
+
+const btnCamera = document.getElementById('btnCamera');
+const btnTakePhoto = document.getElementById('btnTakePhoto');
+
+const video = document.getElementById('video');
+const photo = document.getElementById('photo');
+
+const camera = new Camera(video);
+
+btnCamera.addEventListener('click', ()=>{
+    camera.power();
+})
+
+btnTakePhoto.addEventListener('click', ()=>{
+    let picture = camera.takePhoto();
+    camera.off();
+    photo.setAttribute('src', picture);
+    console.log("Base = " + picture);
+
+})
