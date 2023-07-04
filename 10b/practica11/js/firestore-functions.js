@@ -29,16 +29,14 @@ const saveNoteFireStore = async (note) => {
   return 'failed' 
 }
 
+//No tengo idea
 const updateNoteFireStore = async (note) => {
-  const docRef = await doc(db,'notes',note.id)
-  
-  const updatedNote = {
-    text: note.text,
-    create_at: new Date()
-  }
+  const docRef = await setDoc(collection(db, 'notes').doc('test').set({
+  text: note.text,
+  create_at: new Date()
+}));
 
 if(docRef.id){
- await updateDoc(docRef, updatedNote)
   return 'ok'
 }
 return 'failed' 
