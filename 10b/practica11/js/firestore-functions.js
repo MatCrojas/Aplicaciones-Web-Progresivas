@@ -1,4 +1,4 @@
-import { collection, addDoc, getDocs, setDoc, query, getFirestore } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-firestore.js"; 
+import { collection, orderBy , addDoc, getDocs, doc, updateDoc , query, getFirestore } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-firestore.js"; 
 
 
 import { app } from "./firestore.js";
@@ -6,7 +6,7 @@ import { app } from "./firestore.js";
 const db = getFirestore(app);
 
 const getNotesFireStore = async () => {
-    const q = query(collection(db, 'notes'));
+    const q = query(collection(db, 'notes'),  orderBy("create_at", "desc"));
     const querySnapshot = await getDocs(q);
     return querySnapshot
     
@@ -29,14 +29,16 @@ const saveNoteFireStore = async (note) => {
   return 'failed' 
 }
 
-//No tengo idea
 const updateNoteFireStore = async (note) => {
-  const docRef = await setDoc(collection(db, 'notes').doc('test').set({
-  text: note.text,
-  create_at: new Date()
-}));
+  const docRef = await doc(db,'notes',note.id)
+  
+  const updatedNote = {
+    text: note.text,
+    create_at: new Date()
+  }
 
 if(docRef.id){
+ await updateDoc(docRef, updatedNote)
   return 'ok'
 }
 return 'failed' 
