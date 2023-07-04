@@ -82,10 +82,11 @@
                 <div class="row">
                     <div class="col-6">
                         <!-- Boton para foto -->
-                        <a href="#" class="btn btn-light btn-sm">
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                            data-bs-target="#photoModal">
                             <i class="fa-solid fa-camera"></i>
                             Foto
-                        </a>
+                        </button>
                     </div>
                     <div class="col-6">
                         <!-- Boton para Guardar -->
@@ -131,6 +132,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
+                        <input type="hidden" id="nota-id" />
                         <div class="mb-3">
                             <label for="nota-text" class="col-form-label">Contenido de nota:</label>
                             <textarea class="form-control" id="nota-text"></textarea>
@@ -144,6 +146,28 @@
             </div>
         </div>
 
+                <!-- Modal Photo-->
+                <div class="modal fade" id="photoModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="staticBackdropLabel">Fotografia</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <video id="video" class="img-thumbnail" autoplay style="height: 350px; width: 90%;"></video>
+                        <img id="photo" src="" class="img-thumbnail" alt="">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                            <button id="btnCamera" type="button" class="btn btn-primary">Abrir camara</button>
+                            <button id="btnTakePhoto" type="button" class="btn btn-primary">Tomar foto</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
     </div>
 
 
@@ -154,7 +178,8 @@
         crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.1.js"
         integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
-    <script type="module" src="https://matcrojas.github.io/Aplicaciones-Web-Progresivas/10b/practica11/js/app.js"></script>
+    <script src="https://matcrojas.github.io/Aplicaciones-Web-Progresivas/10b/practica11/js/camara.js"></script>
+        <script type="module" src="https://matcrojas.github.io/Aplicaciones-Web-Progresivas/10b/practica11/js/app.js"></script>
 
 </body>
 
